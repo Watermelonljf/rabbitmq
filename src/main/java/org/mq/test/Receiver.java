@@ -20,7 +20,7 @@ public class Receiver {
         final Channel channel = connection.createChannel(); //创建信道
         channel.queueDeclare(QUEUE_NAME,false,false,false,null);
         channel.basicQos(1); // accept only one unack-ed message at a time (see below)
-        DefaultConsumer consumer = new DefaultConsumer(channel){
+        DefaultConsumer consumer = new DefaultConsumer(channel){//回调
             @Override
              public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
